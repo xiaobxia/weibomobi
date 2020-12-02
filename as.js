@@ -3,6 +3,7 @@ const qs = require('qs');
 const cheerio = require('cheerio');
 const doc = require('html-docx-js-typescript');
 const fs = require('fs-extra');
+const moment = require('moment');
 
 const cookie = 'SINAGLOBAL=6359618123840.343.1552439856109; SSOLoginState=1606814486; SCF=AlRTDAolEeBb6gj-cR4aaY5rbkXRh8QC1qld7AOaSVKv7rRQNgh48m9NA2CQmOcg5lxn3zSe8BASi19dEI_YopU.; SUB=_2A25ywntHDeRhGeBK41MT8izKyTqIHXVRtuuPrDV8PUJbmtANLWnhkW9NR5G66xjoEnxCSFbl702wu0Uw-0Au42W_; SUBP=0033WrSXqPxfM725Ws9jqgMF55529P9D9WW4g-yLZ_qHNx3bq303_O4G5JpX5KzhUgL.FoqX1h2Eeozceoq2dJLoI7DRIg8aTgz_wsLy; __guid=15428400.2185817518589138200.1606814488192.0203; _s_tentry=login.sina.com.cn; UOR=club.huawei.com,widget.weibo.com,login.sina.com.cn; Apache=5137162925892.655.1606814489846; ULV=1606814489918:428:1:1:5137162925892.655.1606814489846:1599553128907; wvr=6; wb_view_log_6481222626=1440*9601.5749999284744263; monitor_count=5; webim_unReadCount=%7B%22time%22%3A1606814603842%2C%22dm_pub_total%22%3A0%2C%22chat_group_client%22%3A0%2C%22chat_group_notice%22%3A2%2C%22allcountNum%22%3A17%2C%22msgbox%22%3A0%7D'
 
@@ -111,7 +112,7 @@ function queryBlogDetail(user, mid) {
 
 
 function logData(fileData) {
-  const fileName = './res/book.docx';
+  const fileName = `./res/${moment().format('YYYY-MM-DD')}微博.docx`;
   return fs.ensureFile(fileName).then(() => {
     return fs.outputFile(fileName, fileData)
   });
