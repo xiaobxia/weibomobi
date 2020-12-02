@@ -5,7 +5,7 @@ const doc = require('html-docx-js-typescript');
 const fs = require('fs-extra');
 const moment = require('moment');
 
-const cookie = 'SINAGLOBAL=6359618123840.343.1552439856109; SSOLoginState=1606814486; SCF=AlRTDAolEeBb6gj-cR4aaY5rbkXRh8QC1qld7AOaSVKv7rRQNgh48m9NA2CQmOcg5lxn3zSe8BASi19dEI_YopU.; SUB=_2A25ywntHDeRhGeBK41MT8izKyTqIHXVRtuuPrDV8PUJbmtANLWnhkW9NR5G66xjoEnxCSFbl702wu0Uw-0Au42W_; SUBP=0033WrSXqPxfM725Ws9jqgMF55529P9D9WW4g-yLZ_qHNx3bq303_O4G5JpX5KzhUgL.FoqX1h2Eeozceoq2dJLoI7DRIg8aTgz_wsLy; __guid=15428400.2185817518589138200.1606814488192.0203; _s_tentry=login.sina.com.cn; UOR=club.huawei.com,widget.weibo.com,login.sina.com.cn; Apache=5137162925892.655.1606814489846; ULV=1606814489918:428:1:1:5137162925892.655.1606814489846:1599553128907; wvr=6; wb_view_log_6481222626=1440*9601.5749999284744263; monitor_count=5; webim_unReadCount=%7B%22time%22%3A1606814603842%2C%22dm_pub_total%22%3A0%2C%22chat_group_client%22%3A0%2C%22chat_group_notice%22%3A2%2C%22allcountNum%22%3A17%2C%22msgbox%22%3A0%7D'
+const cookie = 'SINAGLOBAL=6359618123840.343.1552439856109; __guid=15428400.2185817518589138200.1606814488192.0203; UOR=club.huawei.com,widget.weibo.com,login.sina.com.cn; wvr=6; SSOLoginState=1606872757; _s_tentry=weibo.com; Apache=7461508594750.188.1606872776374; wb_view_log_6481222626=1440*9601.5749999284744263; ULV=1606872776398:429:2:2:7461508594750.188.1606872776374:1606814489918; SCF=AlRTDAolEeBb6gj-cR4aaY5rbkXRh8QC1qld7AOaSVKvytG8n1FiveZFQ_Yr5vPwlgrNe5T_F0eN14dtRx3Nx2o.; SUB=_2A25yw0LhDeRhGeBK41MT8izKyTqIHXVRuTMprDV8PUJbmtAKLUOlkW9NR5G66wiZ1JhT0D9LlpoeXHwgmPIq2__L; SUBP=0033WrSXqPxfM725Ws9jqgMF55529P9D9WW4g-yLZ_qHNx3bq303_O4G5JpX5KzhUgL.FoqX1h2Eeozceoq2dJLoI7DRIg8aTgz_wsLy; WBStorage=8daec78e6a891122|undefined; webim_unReadCount=%7B%22time%22%3A1606890267962%2C%22dm_pub_total%22%3A0%2C%22chat_group_client%22%3A0%2C%22chat_group_notice%22%3A2%2C%22allcountNum%22%3A18%2C%22msgbox%22%3A0%7D; monitor_count=30'
 
 const userList = [
   {
@@ -126,7 +126,7 @@ function logHas(list) {
 }
 
 let qList = []
-userList.forEach(async (user)=>{
+userList.forEach(async (user) => {
   qList.push(queryUserBlog(user, {
     pagebar: 0
   }))
@@ -157,12 +157,14 @@ userList.forEach(async (user)=>{
   // }))
 })
 
-Promise.all(qList).then(()=>{
+Promise.all(qList).then(() => {
   let html = ''
   console.log(contentList.length)
   if (contentList.length > 0) {
-    contentList.forEach((h)=>{
-      html += `<p>${h.html}</p><br/><br/><br/><br/>`
+    contentList.forEach((h) => {
+      let str = h.html
+      str = str.replace(/<\s?img[^>]*>/gi, '');
+      html += `<p>${str}</p><br/><br/><br/><br/>`
     })
     doc.asBlob(html).then((buffer) => {
       logData(buffer)
