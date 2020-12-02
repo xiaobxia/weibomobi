@@ -11,6 +11,21 @@ const userList = [
     uid: '6106031800',
     idl: '1005056106031800',
     name: '菊厂刘掌柜'
+  },
+  {
+    uid: '6169408204',
+    idl: '1005056169408204',
+    name: '风中的厂长'
+  },
+  {
+    uid: '2611641261',
+    idl: '1005052611641261',
+    name: '红茶家的三叔'
+  },
+  {
+    uid: '3224580794',
+    idl: '1005053224580794',
+    name: '_村西边老王_'
   }
 ]
 
@@ -54,6 +69,9 @@ function queryUserBlog(user, query) {
       if (mid) {
         let st = $(this).find('.WB_detail .WB_text.W_f14').text()
         st = Trim(st)
+        if (hasList.indexOf(mid) !== -1) {
+          console.log(mid)
+        }
         // 字数有要求
         if (st.length > 120 && hasList.indexOf(mid) === -1) {
           opList.push(
