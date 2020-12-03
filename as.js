@@ -169,6 +169,7 @@ Promise.all(qList).then(() => {
     contentList.forEach((h) => {
       let str = h.html
       str = str.replace(/<\s?img[^>]*>/gi, '');
+      str = str.replace(/<[^<]*br[^>]*>/gi, '');
       html += `<p>${str}</p><br/><br/><br/><br/>`
     })
     doc.asBlob(html).then((buffer) => {
