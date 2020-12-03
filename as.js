@@ -171,6 +171,7 @@ Promise.all(qList).then(() => {
       str = str.replace(/<\s?img[^>]*>/gi, '');
       str = str.replace(/<[^<]*br[^>]*>/gi, '');
       str = str.replace(/(\s)/g, "");
+      str = str.replace(/(&nbsp;)/g, "");
       html += `<p>${str}</p><br/><br/><br/><br/>`
     })
     doc.asBlob(html).then((buffer) => {
