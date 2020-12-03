@@ -117,7 +117,7 @@ function queryBlogDetail(user, mid) {
 
 
 function logData(fileData) {
-  const fileName = `./res/${moment().format('YYYY-MM-DD')}微博.docx`;
+  const fileName = `./res/微博${moment().format('YYYY-MM-DD')}.docx`;
   return fs.ensureFile(fileName).then(() => {
     return fs.outputFile(fileName, fileData)
   });
