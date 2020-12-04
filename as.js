@@ -114,6 +114,7 @@ function queryBlogDetail(user, mid, time) {
     hasList.push(mid)
     const item = {
       time,
+      userName: user.name,
       html: res.data.data.html
     }
     contentList.push(item)
@@ -191,7 +192,7 @@ Promise.all(qList).then(() => {
         str = str.replace(/<[^<]*br[^>]*>/gi, '');
         str = str.replace(/(\s)/g, "");
         str = str.replace(/(&nbsp;)/g, "");
-        html += `<p>${str}</p><br/><br/><br/><br/>`
+        html += `<p>${h.userName}：${str}</p><br/><br/><br/><br/>`
       }
     })
     doc.asBlob(html).then((buffer) => {
